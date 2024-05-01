@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+    #reminder refactor this later
+
     def show
         user = @current_user
         if user
