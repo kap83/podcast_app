@@ -1,23 +1,38 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { userLogin } from './features/userSlice'
 
 export default function Login() {
 
-  //add code allowing user to see their password or keep it hidden
+ 
 
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
   console.log("password", password)
   console.log("showPassword", showPassword)
 
+  const dispatch = useDispatch();
+  const handleLogin= (e) => {
+    e.preventDefault()
+    
+    let userCredentials={
+      username, password
+    }
+    dispatch(userLogin(userCredentials)) 
+  }
+
 
   return (
     <>
-    <form>
+    <form onSubmit={handleLogin}>
       <label>
         USERNAME: 
         <input 
           type='text'
+          value={username}
+          onChange={(e)=> setUsername(e.target.value)}
         />
       </label>
       <br />
