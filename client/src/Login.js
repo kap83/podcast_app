@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { userLogin } from './features/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
-
- 
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
-  console.log("password", password)
-  console.log("showPassword", showPassword)
+  const navigate = useNavigate()
+
+  //console.log("password", password)
+  //console.log("showPassword", showPassword)
+
+  const {loading, error} = useSelector((state) => state.user)
 
   const dispatch = useDispatch();
   const handleLogin= (e) => {
@@ -20,7 +23,17 @@ export default function Login() {
     let userCredentials={
       username, password
     }
-    dispatch(userLogin(userCredentials)) 
+    dispatch(userLogin(userCredentials)).then((result)=> {
+      if(userLogin.fulfilled.match(result)){
+        console.log('Login successful', result.payload);
+        setUsername('');
+        setPassword('');
+        navigate('/')
+      }
+      else {
+        console.log('login failed', result.payload)
+      }
+    }) 
   }
 
 
@@ -56,9 +69,13 @@ export default function Login() {
         />
       </label> see your password
       <br />
-      <button>SUBMIT</button>
+      <button>
+        {loading ? 'Loading...' : 'Login'} </button>
+        {error&&(
+          <div>{error}</div>
+        )}
       <br />
-      <p>Don't have an account? Register <button>HERE</button></p>
+      <p>Don't have an account? Register <button>Here</button></p>
 
       </form>
     </>
