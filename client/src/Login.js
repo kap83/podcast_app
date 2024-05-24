@@ -16,6 +16,12 @@ export default function Login() {
 
   const {loading, error} = useSelector((state) => state.user)
 
+  const test = useSelector((state) => state.user.user)
+
+  console.log("state", test)
+
+
+
   const dispatch = useDispatch();
   const handleLogin= (e) => {
     e.preventDefault()

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const userLogin=createAsyncThunk(
+export const userLogin = createAsyncThunk(
     'user/userLogin',
     async(userCredentials, {rejectWithValue}) => {
         try {
@@ -24,9 +24,21 @@ export const userLogin=createAsyncThunk(
             return rejectWithValue(error.toString)
         }
         
-    
     }
 )
+
+export const userLogout = createAsyncThunk(
+  'user/userLogout',
+  async() => {
+    const response = await fetch('/logout', {
+      method: 'DELETE'
+    })
+
+    if(!response.ok){
+      throw new Error('Failed to Logout')
+    }
+
+  })
 
 export const userSlice = createSlice({
     name: 'user',
@@ -34,6 +46,7 @@ export const userSlice = createSlice({
       loading: false,
       user: null,
       error: null,
+      loggedIn: false
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -44,15 +57,28 @@ export const userSlice = createSlice({
         .addCase(userLogin.fulfilled, (state, action) => {
           state.loading = false
           state.user = action.payload
+          state.loggedIn = true
+          state.error = null
         })
         .addCase(userLogin.rejected, (state, action) => {
           state.loading = false
           state.user = null
-          console.log(action.error.message)
+          //console.log(action.error.message)
           state.error = action.error.message
-        });
+        })
+        .addCase(userLogout.fulfilled, (state) => {
+          state.user = null 
+          state.loggedIn = false
+          console.log("success!")
+        })
+        .addCase(userLogout.rejected, (state, action) => {
+          state.status = 'failed';
+          state.error = action.error.message
+        })
     },
   });
+
+
 
 export default userSlice.reducer
 
