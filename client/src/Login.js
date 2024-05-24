@@ -11,16 +11,7 @@ export default function Login() {
 
   const navigate = useNavigate()
 
-  //console.log("password", password)
-  //console.log("showPassword", showPassword)
-
-  const {loading, error} = useSelector((state) => state.user)
-
-  const test = useSelector((state) => state.user.user)
-
-  console.log("state", test)
-
-
+  const {loading, error} = useSelector(state => state.user)
 
   const dispatch = useDispatch();
   const handleLogin= (e) => {
@@ -31,7 +22,7 @@ export default function Login() {
     }
     dispatch(userLogin(userCredentials)).then((result)=> {
       if(userLogin.fulfilled.match(result)){
-        console.log('Login successful', result.payload);
+        //console.log('Login successful', result.payload);
         setUsername('');
         setPassword('');
         navigate('/')

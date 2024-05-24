@@ -12,6 +12,7 @@ export default function LogoutBtn() {
 
     const handleLogout = () =>  {
         dispatch(userLogout()).then(()=> {
+            sessionStorage.removeItem('user')
             navigate('/login')
         })
     }
