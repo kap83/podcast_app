@@ -20,8 +20,10 @@ function App() {
       </>
       )} else {
         return (
-          <>
-            <Login />
+          <><Routes>
+            <Route path='/login' element={<Login />} />
+          </Routes>
+            
           </>
         )}
 }
