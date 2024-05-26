@@ -32,3 +32,4 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /home/kap/code/projects/podcast_app/.gitignore
+/home/kap/code/projects/podcast_app/CodingResources.txt
