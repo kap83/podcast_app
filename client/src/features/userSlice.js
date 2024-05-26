@@ -63,7 +63,6 @@ export const userSlice = createSlice({
         .addCase(userLogin.rejected, (state, action) => {
           state.loading = false
           state.user = null
-          //console.log(action.error.message)
           state.error = action.error.message
         })
         .addCase(userLogout.fulfilled, (state) => {
