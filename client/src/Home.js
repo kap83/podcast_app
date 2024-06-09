@@ -11,12 +11,10 @@ export default function Home() {
 
   console.log(user)
 
-
-  
   return (
-    <div>
-        <LogoutBtn />
+    <>
+      <LogoutBtn />
        <h3>hello {user.first_name}!</h3> 
-    </div>
+    </>
   )
 }
