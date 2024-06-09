@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <div>
         <LogoutBtn />
-       <h3>hello {user.first_name}!</h3>
+       <h3>hello {user.first_name}!</h3> 
     </div>
   )
 }

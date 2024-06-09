@@ -4,8 +4,10 @@ class UserSerializer < ActiveModel::Serializer
 
   def avatar_url 
     if object.avatar.attached?
-      variant = object.avatar.variant(resize_to_limit: [100,nil])
-      return rails_representation_url(variant, only_path: true)
+      variant = object.avatar.variant(resize_to_limit: [100, nil])
+      rails_representation_url(variant, only_path: true)
+    else
+      ActionController::Base.helpers.asset_path('defaultavatar.png')
     end
   end
 
