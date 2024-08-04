@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Login from './Login';
 import Home from './Home';
 import './App.css';
+import FrontPage from './FrontPage';
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
     return (
       <>
         <Routes>
-            <Route exact path='/' element={<Home />} />  
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/FrontPage' element={<FrontPage />}/> 
         </Routes>
       </>
       )} else {
